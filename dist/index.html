@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <script src="https://unpkg.com/d3-milestones@1.0.0-alpha8/build/d3-milestones.min.js"></script>
+
+        <style>.milestones__category_label {
+        display: inline-block;
+        text-align: right;
+        font-size: 14px;
+        margin-top: -4px;
+        float: left;
+        }
+        .milestones__horizontal_line {
+        position: absolute;
+        background-color: grey;
+        height: 3px;
+        margin-top: 4px;
+        margin-left: 5.5px;
+        border-radius: 1.5px;
+        }
+        .milestones__group {
+        position: absolute;
+        font-family: sans-serif;
+        font-size: 10px;
+        }
+        .milestones__group__bullet {
+        background-color: #fff;
+        border: 3px solid #333;
+        border-radius: 50%;
+        width: 0px;
+        height: 0px;
+        padding: 2.5px;
+        }
+        .milestones__group__label {
+        position: absolute;
+  /*      border-left: .25px solid white;*/
+        margin-left: 5px;
+        padding: 0;
+        color: white;
+        text-align: left;
+        font-size: 14px;
+        }
+        .milestones__group__label div {
+        position: relative;
+        margin-left: 3px;
+        }
+        .milestones__group__label-above {
+        bottom: 100%;
+        }
+        .milestones__group__label-last {
+        right: 100%;
+        border-left: 0;
+        border-right: 1px solid #000;
+        margin-left: 0;
+        margin-right: -6px;
+        text-align: right;
+        }
+        .milestones__group__label-last div {
+        margin-left: 0px;
+        margin-right: 3px;
+        }
+        .milestones__group__label__text__title {
+        color: white;
+        font-weight: bold;
+        white-space: nowrap;
+        text-align: left;
+        font-size: 16px;
+        }
+
+
+          .container {
+            /*max-width: 60rem;*/
+            justify-content: center
+          }
+
+          .sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+          }
+
+          #bar-chart #chart-4 .y-axis path {
+            display: none;
+          }
+
+           #bar-chart #chart-4 .axis text {
+            fill: #999;
+          }
+
+           #bar-chart #chart-4 .axis line
+           {
+            stroke: #999;
+            stroke-width: 0.5px;
+          }
+
+           #bar-chart #chart-4 .axis .domain {
+            stroke: #999;
+            stroke-width: 0.5px;
+          }
+
+           #bar-chart #chart-4 .axis {
+            font-size: 12px;
+          }
+
+          p small {
+            background: #fff880;
+            text-align: center;
+          }
+
+          .colored-text {
+            padding: 1px 7px;
+            display: inline-block;
+          }
+          a, .pink {
+            color: #d44e8a;
+            font-weight: bold;
+          }
+
+          .white {
+            color: white;
+          }
+
+
+          #timeline {
+          width: 960px;
+          height: 500px;
+          align-items: center;
+          display: block;
+          }
+
+          img, h1, h2, h3 {
+            text-align: center;
+          }
+
+
+          .super-font {
+          font-family: 'Roboto Condensed', sans-serif;
+          }
+          .sub-font {
+          font-family: 'Lora', serif;
+          }
+
+          .headline {
+          font-size: 3.5rem;
+          line-height: 0.9;
+          margin-bottom: 0.25rem;
+          margin-top: 1rem;
+          font-weight: 700;
+          }</style>
+        <style>/* Highlight steps when you scroll into them */
+          /* You can delete this one! */
+/*          .step.entered {
+            -webkit-transform-style: preserve-3d;
+            -moz-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transition: 1.5s background;
+            -moz-transition: 1.5s background;
+            transition: 1.5s background;
+            background: #fff888;
+          }*/
+
+          /* Set the sticky things 2% from the top */
+          .sticky {
+            top: 0vh;
+            align-self: flex-start;  
+          }
+
+          /* Minimum height of 70% of the screen */
+          .step {
+            min-height: 75vh;
+            width: 20vh;
+          }
+
+          .step > p {
+            background: rgba(255,255,255,0.9);
+            padding: 10px;
+            margin-bottom: 0;
+            padding-bottom: 1rem;
+          }
+
+
+
+          body {
+          margin: 0;
+          background: #202226;
+          }
+
+/*
+
+/*svg:nth-child(1) .pulse-disk {
+  fill: #7864ff;
+}
+svg:nth-child(1) .pulse-circle, svg:nth-child(1) .pulse-circle-2 {
+  stroke: #7864ff;
+}*/
+
+/*svg:nth-child(2) .pulse-disk {
+  fill: #ff3c64;
+}
+svg:nth-child(2) .pulse-circle, svg:nth-child(2) .pulse-circle-2 {
+  stroke: #ff3c64;
+}*/
+
+/*svg:nth-child(3) .pulse-disk {
+  fill: #00c878;
+}
+svg:nth-child(3) .pulse-circle, svg:nth-child(3) .pulse-circle-2 {
+  stroke: #00c878;
+}*/
+
+/*.pulse-circle,
+.pulse-circle-2 {
+  transform-origin: center;
+  stroke-width: 2;
+  fill: none;
+  transform: translate3d(0, 0, 0);
+}
+
+.pulse-disk {
+  r: 6;
+}
+
+.pulse-circle {
+  r: 4;
+  animation: pulse 3s cubic-bezier(0.39, 0.54, 0.41, 1.5) infinite;
+}
+
+.pulse-circle-2 {
+  r: 16;
+  animation: pulse-2 3s cubic-bezier(0.39, 0.54, 0.41, 1.5) infinite;
+}
+
+@keyframes pulse {
+  0% {
+    r: 4;
+  }
+  50% {
+    r: 16;
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    r: 16;
+  }
+}
+@keyframes pulse-2 {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  49.99% {
+    r: 16;
+    opacity: 0;
+  }
+  50% {
+    r: 4;
+    opacity: 1;
+  }
+  100% {
+    r: 16;
+    opacity: 1;
+  }
+}*/
+
+.col-sml-center {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }</style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+      <svg class="pulse" x="0px" y="0px" width="100px" height="100px" viewbox="0 0 100 100">
+        <circle class="pulse-disk" cx="50" cy="50"></circle> 
+        <circle class="pulse-circle" cx="50" cy="50" stroke-width="2"></circle>
+        <circle class="pulse-circle-2" cx="50" cy="50" stroke-width="2"></circle>
+      </svg>
+
+      <svg class="pulse" x="0px" y="0px" width="100px" height="100px" viewbox="0 0 100 800">
+        <circle class="pulse-disk" cx="100" cy="800"></circle> 
+        <circle class="pulse-circle" cx="100" cy="800" stroke-width="2"></circle>
+        <circle class="pulse-circle-2" cx="100" cy="800" stroke-width="2"></circle>
+      </svg> 
+
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 mt-5 mb-5">
+          <h1 class="white headline super-font">WHERE DO US CYBER ATTACKS COME FROM?</h1><br><br>
+          <div class="row justify-content-center">
+      <div class="col-lg-10 ">
+        <p class="white credit super-font">Catharina Felke, Yuanqi Hong, Katherine Sliney</p>
+        <p class="white date sub-font">December 2018</p>
+        <p class="white body-text sub-font">
+          <a href="https://books.google.com/books?id=ZfrNCgAAQBAJ&source=gbs_ViewAPI">Cyber operations</a> is about the configuration, defense, and attack of real systems. As you're reading this, there are likely hundreds of thousands of cyber attacks going on around the globe. <a href="https://www.pandasecurity.com/usa/company-profile/">Panda Security</a>, a Spanish multinational specialized in the development of IT security solutions, both detected and neutralized more than <a href="https://www.pandasecurity.com/mediacenter/press-releases/all-recorded-malware-appeared-in-2015/">84 million</a> new malware samples throughout 2015. That means an average of 230,000 new malware samples were produced on a daily basis in 2015, and the number is only growing ever more rapidly.
+        </p>
+     <!--    <p class="white body-text sub-font">
+          Motivations of these attacks range from <a href="https://www.digitaltrends.com/computing/the-most-ridiculous-hacks-that-have-ever-happened/8/">hobbyists' impulses to make badass jokes</a> to significant monetary gains, and the hackers behind them can range from <a href="https://eng.umd.edu/news/story/study-hackers-attack-every-39-seconds">unsophisticated ones</a> using brute-force "dictionary scripts" to see if a computer is even more unsophisticated by using "root" or "admin" as the username and "123456" as the password, to serious state-sponsored Advanced Persistent Threats (<a href="https://en.wikipedia.org/wiki/Advanced_persistent_threat">APT</a>s) that end up in the <a href="https://www.fbi.gov/wanted/cyber">FBI's wanted list</a>.<br><br>
+        </p> -->
+      </div>
+    </div>          
+        </div>
+        <div class="col-lg-8 sticky">
+          <div id="chart-3"></div>
+        </div>
+
+      <div class="row align-items-center">
+       <div class="col-sm-4 align-items-center">
+         <div class="step">
+            <p>These countries launch cyber attacks on the U.S. most frequently.</p>
+          </div>
+          <div class="step justify-content-center" id="step-china">
+            <p>1. <strong>China</strong></p>
+          </div>
+          <div class="step justify-content-center" id="step-russia">
+            <p>2. <strong>Russia</strong></p>
+          </div>
+          <div class="step justify-content-center" id="step-iran">
+            <p>3. <strong>Iran</strong></p>
+          </div>
+          <div class="step justify-content-center" id="step-nk">
+            <p>4. <strong>North Korea</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <p class="white center">
+         <br><br><br><br><br> In an effort to document publicly known state-sponsored cyber operations, the Council on Foreign Relations (<a href="https://www.cfr.org/">CFR</a>), an independent think tank based in the U.S., launched a program that tracks incidents from 2005 to present. The data is available on the <a href="https://www.cfr.org/interactive/cyber-operations">program's website</a>. Like any other datasets that try to categorize cyber attacks, CFR's data should by no means deemed complete; nonetheless, it provides a good sample of state-sponsored operations that were exposed in English.<br><br>
+          </p>
+        </div>
+      </div>
+
+       <div class="row justify-content-center">
+        <div class="col-sm-12 mt-5 mb-5">
+          <h2 class="white">State-Sponsored Attacks Continue to Increase</h2><br>
+        <div>
+      </div>
+
+          <center>
+            <img class="col-md-6" src="/cyber_chart.7afe5133.png" alt="APT attacks">
+          </center>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 mt-5 mb-5">
+      <h2 class="white">A Timeline of Cyber Attacks on the US</h2><br>
+      <center><div id="timeline"></div></center>  
+  </div>
+</div>
+
+        
+      
+    <script src="/03-chart.f3c4eae7.js"></script>
+    <script src="/scrollytelling.74c0b9bd.js"></script>
+    <script src="/timeline.02a44989.js"></script>
+<!--     <script src="bar-chart.js"></script> -->
+
+
+   </body>
+</html>
