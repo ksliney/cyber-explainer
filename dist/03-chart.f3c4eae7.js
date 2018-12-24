@@ -30627,21 +30627,15 @@ Object.keys(_topojsonSimplify).forEach(function (key) {
   });
 });
 },{"topojson-client":"../node_modules/topojson/node_modules/topojson-client/index.js","topojson-server":"../node_modules/topojson/node_modules/topojson-server/index.js","topojson-simplify":"../node_modules/topojson/node_modules/topojson-simplify/index.js"}],"data/world.topojson":[function(require,module,exports) {
-"use strict";
-
 module.exports = "/world.ccdd4a41.topojson";
 },{}],"03-chart.js":[function(require,module,exports) {
 "use strict";
 
-var _d = require("d3");
+var d3 = _interopRequireWildcard(require("d3"));
 
-var d3 = _interopRequireWildcard(_d);
+var topojson = _interopRequireWildcard(require("topojson"));
 
-var _topojson = require("topojson");
-
-var topojson = _interopRequireWildcard(_topojson);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 var margin = {
   top: 10,
@@ -30723,7 +30717,7 @@ function ready(json) {
     });
   });
 }
-},{"d3":"../node_modules/d3/index.js","topojson":"../node_modules/topojson/index.js","./data/world.topojson":"data/world.topojson"}],"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"d3":"../node_modules/d3/index.js","topojson":"../node_modules/topojson/index.js","./data/world.topojson":"data/world.topojson"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -30750,7 +30744,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58074" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49419" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -30892,5 +30886,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","03-chart.js"], null)
+},{}]},{},["../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","03-chart.js"], null)
 //# sourceMappingURL=/03-chart.f3c4eae7.map
