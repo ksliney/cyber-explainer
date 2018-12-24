@@ -37,6 +37,7 @@
     "enter-view": "^1.0.0",
     "jest": "^23.6.0",
     "node-fetch": "^2.2.0",
+    "parcel": "^1.11.0",
     "prettyprint": "^1.1.2",
     "topojson": "^3.0.2"
   }
