@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --out-dir docs --public-url /change-me-to-match-your-repo"
+    "build": "parcel build src/index.html --out-dir docs --public-url /cyber-explainer"
   },
   "jest": {
     "setupFiles": [
@@ -14,7 +14,6 @@
     ]
   },
   "keywords": [],
-  "author": "Jonathan Soma <jonathan.soma@gmail.com> (http://jonathansoma.com)",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
