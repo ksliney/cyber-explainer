@@ -166,7 +166,7 @@ milestones('#timeline').mapping({
   year: 2015,
   title: '🐼🇨🇳China&#39;s "Deep Panda" <a href="https://thehill.com/policy/cybersecurity/249601-opm-hackers-may-have-hit-united-airlines-as-well">hacks</a> United Airlines'
 }]);
-},{}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -193,7 +193,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62962" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53482" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -335,5 +335,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["../node_modules/parcel/src/builtins/hmr-runtime.js","timeline.js"], null)
+},{}]},{},["../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","timeline.js"], null)
 //# sourceMappingURL=/timeline.02a44989.map
